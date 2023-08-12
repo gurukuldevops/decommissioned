@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+  ghost1:
+    image: ghost:latest
+    container_name: ghost1
+    restart: unless-stopped
+    environment:
+      url: https://${WEBSITE1_DOMAIN}
+    volumes:
+      - ghost1-data:${GHOST1_VOLUME_PATH}
+
+  ghost2:
+    image: ghost:latest
+    container_name: ghost2
+    restart: unless-stopped
+    environment:
+      url: https://${WEBSITE2_DOMAIN}
+    volumes:
+      - ghost2-data:${GHOST2_VOLUME_PATH}
+
+  ghost3:
+    image: ghost:latest
+    container_name: ghost3
+    restart: unless-stopped
+    environment:
+      url: https://${WEBSITE3_DOMAIN}
+    volumes:
+      - ghost3-data:${GHOST3_VOLUME_PATH}
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${CERTS_PATH}:/etc/letsencrypt
+
+volumes:
+  ghost1-data:
+  ghost2-data:
+  ghost3-data:
