@@ -1,33 +1,54 @@
 version: '3.1'
 
 services:
+  db:
+    image: mysql:8.0 # As of my knowledge cut-off in September 2021, MySQL 8.1.0 was not released. Adjust as needed.
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+
   ghost1:
     image: ghost:latest
-    container_name: ghost1
-    restart: unless-stopped
     environment:
-      url: https://${WEBSITE1_DOMAIN}
+      database__client: mysql
+      database__connection__host: localhost
+      database__connection__user: ${DB_USERNAME}
+      database__connection__password: ${DB_PASSWORD}
+      database__connection__database: ${WEBSITE1_DB_NAME}
     volumes:
-      - ghost1-data:${GHOST1_VOLUME_PATH}
+      - ${WEBSITE1_FOLDER}:/var/lib/ghost/content
+    ports:
+      - "3001:2368"
 
   ghost2:
     image: ghost:latest
-    container_name: ghost2
-    restart: unless-stopped
     environment:
-      url: https://${WEBSITE2_DOMAIN}
+      database__client: mysql
+      database__connection__host: localhost
+      database__connection__user: ${DB_USERNAME}
+      database__connection__password: ${DB_PASSWORD}
+      database__connection__database: ${WEBSITE2_DB_NAME}
     volumes:
-      - ghost2-data:${GHOST2_VOLUME_PATH}
+      - ${WEBSITE2_FOLDER}:/var/lib/ghost/content
+    ports:
+      - "3002:2368"
 
   ghost3:
     image: ghost:latest
-    container_name: ghost3
-    restart: unless-stopped
     environment:
-      url: https://${WEBSITE3_DOMAIN}
+      database__client: mysql
+      database__connection__host: localhost
+      database__connection__user: ${DB_USERNAME}
+      database__connection__password: ${DB_PASSWORD}
+      database__connection__database: ${WEBSITE3_DB_NAME}
     volumes:
-      - ghost3-data:${GHOST3_VOLUME_PATH}
-
+      - ${WEBSITE3_FOLDER}:/var/lib/ghost/content
+    ports:
+      - "3003:2368"
+      
   nginx:
     image: nginx:latest
     container_name: nginx
