@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Load variables from .env file
+# Load variables from .env file.
 export $(grep -v '^#' .env | xargs)
 
 docker-compose stop nginx
