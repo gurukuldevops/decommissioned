@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   db:
-    image: mysql:8.0 # As of my knowledge cut-off in September 2021, MySQL 8.1.0 was not released. Adjust as needed.
+    image: mysql:8.0 # As of my knowledge cut-off in September 2021, MySQL 8.1.0 was not released. Adjust as needed
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
