@@ -17,19 +17,19 @@ jobs:
         run: echo "${{ secrets.ENV_CONTENT }}" > .env
 
       - name: Copy all files to server
-        run: scp -r * ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/path/to/project
+        run: scp -r * ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home
 
       - name: Copy renew script to server
-        run: scp renew.sh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/path/to/renew.sh
+        run: scp renew.sh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/renew.sh
 
       - name: Make renew script executable
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "chmod +x /path/to/renew.sh"
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "chmod +x /home/renew.sh"
 
       - name: Add renew script to cron
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "(crontab -l; echo '0 */12 * * * /path/to/renew.sh') | crontab -"
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "(crontab -l; echo '0 */12 * * * /home/renew.sh') | crontab -"
 
       - name: Execute setup script on server
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash /path/to/project/setup.sh"
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash /home/setup.sh"
 
       - name: Restart Docker services
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /path/to/project && docker-compose up -d"
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home && docker-compose up -d"
