@@ -39,7 +39,7 @@ jobs:
           target: "/home/website-scripts"
 
       - name: Create cronjob on remote server
-        uses: appleboy/ssh-action@master
+        uses: ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -48,7 +48,7 @@ jobs:
           script: "(crontab -l; echo '0 */12 * * * /home/website-files/renew.sh') | crontab -"
 
       - name: Execute setup script on remote server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -57,7 +57,7 @@ jobs:
           script: "bash /home/setup.sh"
         
       - name: Execute docker compose on remote server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
