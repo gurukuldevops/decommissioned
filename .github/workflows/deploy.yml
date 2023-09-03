@@ -44,6 +44,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: "(crontab -l; echo '0 */12 * * * /home/website-files/renew.sh') | crontab -"
 
       - name: Execute setup script on remote server
@@ -52,6 +53,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}          
           script: "bash /home/setup.sh"
         
       - name: Execute docker compose on remote server
@@ -60,4 +62,5 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}          
           script: "cd /home && docker-compose up -d"                      
