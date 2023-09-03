@@ -8,7 +8,7 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+      - /home/website-scripts/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
 
   ghost1:
     image: ghost:latest
@@ -19,7 +19,7 @@ services:
       database__connection__password: ${DB_PASSWORD}
       database__connection__database: ${WEBSITE1_DB_NAME}
     volumes:
-      - ${WEBSITE1_FOLDER}:/var/lib/ghost/content
+      - ${WEBSITE1_FOLDER}:/var/lib/ghost/content/
     ports:
       - "3001:2368"
 
@@ -57,7 +57,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/website-scripts/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ${CERTS_PATH}:/etc/letsencrypt
 
 volumes:
