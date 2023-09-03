@@ -44,7 +44,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: "(crontab -l; echo '0 */12 * * * /home/website-files/renew.sh') | crontab -"
+          script: whoami
 
       - name: Execute setup script on remote server
         uses: appleboy/ssh-action@v1.0.0
