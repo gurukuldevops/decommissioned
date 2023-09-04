@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   db:
-    image: mysql:8.0 # As of my knowledge cut-off in September 2021, MySQL 8.1.0 was not released. Adjust as needed
+    image: mysql:8.0 
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
@@ -20,6 +20,7 @@ services:
       database__connection__database: ${WEBSITE1_DB_NAME}
     volumes:
       - ${WEBSITE1_FOLDER}:/var/lib/ghost/content/
+      - /var/logs/ghost/${WEBSITE1_DB_NAME}:/var/log/ghost      
     ports:
       - "3001:2368"
 
@@ -33,6 +34,7 @@ services:
       database__connection__database: ${WEBSITE2_DB_NAME}
     volumes:
       - ${WEBSITE2_FOLDER}:/var/lib/ghost/content
+      - /var/logs/ghost/${WEBSITE2_DB_NAME}:/var/log/ghost      
     ports:
       - "3002:2368"
 
@@ -46,6 +48,7 @@ services:
       database__connection__database: ${WEBSITE3_DB_NAME}
     volumes:
       - ${WEBSITE3_FOLDER}:/var/lib/ghost/content
+      - /var/logs/ghost/${WEBSITE3_DB_NAME}:/var/log/ghost      
     ports:
       - "3003:2368"
       
