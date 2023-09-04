@@ -38,7 +38,7 @@ jobs:
           source: "./*"
           target: "/home/website-scripts"
 
-      - name: Create cronjob on remote server
+      - name: Create cronjob on remote server for certificate renewal
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: "(crontab -l; echo '0 */12 * * * /home/website-scripts/renew.sh') | crontab -"
 
-      - name: Execute setup script on remote server
+      - name: Execute setup script on remote server to setup certificates
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -60,4 +60,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}        
-          script: "cd /home/website-scripts && docker-compose up --verbose -d"                      
+          script: "cd /home/website-scripts && docker-compose up --verbose -d --verbose"                      
