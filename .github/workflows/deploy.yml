@@ -60,4 +60,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}        
-          script: "cd /home/website-scripts && docker-compose up -d"                      
+          script: "cd /home/website-scripts && docker-compose up --verbose -d"                      
