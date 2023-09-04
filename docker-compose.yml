@@ -63,8 +63,7 @@ services:
     volumes:
       - /home/website-scripts/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ${CERTS_PATH}:/etc/letsencrypt
-      - /var/log/website-logs/nginx_logs/access.log:/var/log/nginx/access.log
-      - /var/log/website-logs/nginx_logs/error.log:/var/log/nginx/error.log
+      - /var/log/website-logs/nginx:/var/log/nginx
 
 volumes:
   ghost1-data:
