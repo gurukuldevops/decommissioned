@@ -19,6 +19,7 @@ services:
       database__connection__user: ${DB_USERNAME}
       database__connection__password: ${DB_PASSWORD}
       database__connection__database: ${WEBSITE1_DB_NAME}
+      DEBUG: 1
     volumes:
       - ${WEBSITE1_FOLDER}:/var/lib/ghost/content/
       - /var/log/website-logs/ghost/${WEBSITE1_DB_NAME}:/var/log/ghost      
@@ -33,6 +34,7 @@ services:
       database__connection__user: ${DB_USERNAME}
       database__connection__password: ${DB_PASSWORD}
       database__connection__database: ${WEBSITE2_DB_NAME}
+      DEBUG: 1
     volumes:
       - ${WEBSITE2_FOLDER}:/var/lib/ghost/content
       - /var/log/website-logs/ghost/${WEBSITE2_DB_NAME}:/var/log/ghost      
@@ -47,6 +49,7 @@ services:
       database__connection__user: ${DB_USERNAME}
       database__connection__password: ${DB_PASSWORD}
       database__connection__database: ${WEBSITE3_DB_NAME}
+      DEBUG: 1
     volumes:
       - ${WEBSITE3_FOLDER}:/var/lib/ghost/content
       - /var/log/website-logs/ghost/${WEBSITE3_DB_NAME}:/var/log/ghost      
