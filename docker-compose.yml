@@ -13,6 +13,8 @@ services:
 
   ghost1:
     image: ghost:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     environment:
       database__client: mysql
       database__connection__host: localhost
@@ -28,6 +30,8 @@ services:
 
   ghost2:
     image: ghost:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t    
     environment:
       database__client: mysql
       database__connection__host: localhost
@@ -43,6 +47,8 @@ services:
 
   ghost3:
     image: ghost:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t    
     environment:
       database__client: mysql
       database__connection__host: localhost
@@ -58,6 +64,8 @@ services:
       
   nginx:
     image: nginx:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t    
     container_name: nginx
     restart: unless-stopped
     ports:
